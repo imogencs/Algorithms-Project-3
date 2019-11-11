@@ -1,7 +1,15 @@
+// C2019 IMOLU!!!!!!!!!!!!!
+
 #include <iostream> 
 using namespace std;
 
-
+/**
+ * creates and returns a new string that contains only the letters
+ * of the inputted string, and converted to lower case. 
+ * (excludes whitespace, numbers, and punctuation.)
+ * @param oldStr the string
+ * @return the new, converted string
+ */
 char* toLowerCase (char* oldStr) {
 	char* newStr = new char[256];
 	int newStrIndex = 0;
@@ -17,6 +25,20 @@ char* toLowerCase (char* oldStr) {
 	return newStr;
 }
 
+
+
+/** 
+ * determines whether the given string is a palendrome
+ * does not account for capitals, whitespace, numbers or punctuation;
+ * that must be done before passing the string in to isPalindrome().
+ * uses recursion.
+ * @param str the string
+ * @param len the length of the string. during subsequent recursive calls to 
+ *		isPalendrome(), len will correspond to the index of the char 
+ * 		you need to check, rather than to the null terminator of
+ * 		the actual string.
+ * @return 0 if not a palendrome, 1 otherwise
+ */
 int isPalindrome (char* str, int len) {
 	int isPal = 0;
 	if (len == 0) {
@@ -31,6 +53,17 @@ int isPalindrome (char* str, int len) {
 	return isPal;
 }
 
+
+
+/**
+ * executes isPalendrome() on the inputted string after stripping and converting it
+ * using toLowerCase(); then prints the results.
+ * The inputted string can be either given as a command line argument or as a std input
+ * argument. 
+ * @param argc number of elements in argv
+ * @param argv command line arguments
+ * @return 0
+ */
 int main (int argc, char** argv) {
 	char* originalStr = new char[256];
 	char* effectiveStr = new char[256];
@@ -47,11 +80,18 @@ int main (int argc, char** argv) {
 		len++;
 	}
 
-	if (isPalindrome(effectiveStr, len)) {
-		cout << "\"" << originalStr << "\"" << " is a palendrome!" << endl;
+	cout << "Inputted String:  " << originalStr << endl;
+	if (*effectiveStr == '\0') {
+		cout << "Effective String: [empty]" << endl;
 	}
 	else {
-		cout << "\"" << originalStr << "\"" << " is not a palendrome :(" << endl;
+		cout << "Effective String: " << effectiveStr << endl;
+	}
+	if (isPalindrome(effectiveStr, len)) {
+		cout << "\"" << effectiveStr << "\"" << " is a palendrome!" << endl;
+	}
+	else {
+		cout << "\"" << effectiveStr << "\"" << " is not a palendrome :(" << endl;
 	}
 	return 0;
 }
