@@ -4,9 +4,9 @@
 using namespace std;
 
 /**
- * creates and returns a new string that contains only the letters
+ * creates and returns a new string that contains only the letters and numbers
  * of the inputted string, and converted to lower case. 
- * (excludes whitespace, numbers, and punctuation.)
+ * (excludes whitespace and punctuation.)
  * @param oldStr the string
  * @return the new, converted string
  */
@@ -15,7 +15,7 @@ char* toLowerCase (char* oldStr) {
 	int newStrIndex = 0;
 	int oldStrIndex = 0;
 	while (*(oldStr+oldStrIndex) != '\0') {
-		if (isalpha(*(oldStr+oldStrIndex))) {
+		if (isalpha(*(oldStr+oldStrIndex)) || isdigit(*(oldStr+oldStrIndex))) {
 			*(newStr+newStrIndex) = tolower(*(oldStr+oldStrIndex));
 			newStrIndex++;
 		}
@@ -29,7 +29,7 @@ char* toLowerCase (char* oldStr) {
 
 /** 
  * determines whether the given string is a palendrome
- * does not account for capitals, whitespace, numbers or punctuation;
+ * does not account for capitals, whitespace, or punctuation;
  * that must be done before passing the string in to isPalindrome().
  * uses recursion.
  * @param str the string
