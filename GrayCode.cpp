@@ -23,12 +23,12 @@ int main() {
 		grayCodes[i] = new char[n];
 
 	newGrayCode(n, grayCodes);
-//	for (int i = 0; i < (int)pow(2,n); i++) {
-//		for (int j = n-1; j >= 0; j--) {
-//			cout << grayCodes[i][j];
-//		}
-//		cout << endl;
-//	}	cout << endl; cout.flush();
+	//	for (int i = 0; i < (int)pow(2,n); i++) {
+	//		for (int j = n-1; j >= 0; j--) {
+	//			cout << grayCodes[i][j];
+	//		}
+	//		cout << endl;
+	//	}	cout << endl; cout.flush();
 
 	printTable(n, grayCodes);
 	return 0;
@@ -142,43 +142,45 @@ void printTable(int n, char** grayCodes) {
 			}
 		}
 		// get the action
-		switch (abacadabra[i]) {
-		case 0 :
-			action = action + "Alice ";
-			if (currentGrayCode[0] == '1') {
-				action = action + "Out";
+		if (i != 0) {
+			switch (abacadabra[i - 1]) {
+			case 0 :
+				action = action + "Alice ";
+				if (currentGrayCode[0] == '1') {
+					action = action + "Out";
+				}
+				else {
+					action = action + "In";
+				}
+				break;
+			case 1 :
+				action = action + "Bob ";
+				if (currentGrayCode[1] == '1') {
+					action = action + "Out";
+				}
+				else {
+					action = action + "In";
+				}
+				break;
+			case 2 :
+				action = action + "Chris ";
+				if (currentGrayCode[2] == '1') {
+					action = action + "Out";
+				}
+				else {
+					action = action + "In";
+				}
+				break;
+			case 3 :
+				action = action + "Dylan ";
+				if (currentGrayCode[3] == '1') {
+					action = action + "Out";
+				}
+				else {
+					action = action + "In";
+				}
+				break;
 			}
-			else {
-				action = action + "In";
-			}
-			break;
-		case 1 :
-			action = action + "Bob ";
-			if (currentGrayCode[1] == '1') {
-				action = action + "Out";
-			}
-			else {
-				action = action + "In";
-			}
-			break;
-		case 2 :
-			action = action + "Chris ";
-			if (currentGrayCode[2] == '1') {
-				action = action + "Out";
-			}
-			else {
-				action = action + "In";
-			}
-			break;
-		case 3 :
-			action = action + "Dylan ";
-			if (currentGrayCode[3] == '1') {
-				action = action + "Out";
-			}
-			else {
-				action = action + "In";
-			}
-			break;
 		}
 
 		cout << left << setw(indexWidth) << setfill(separator) << i;
