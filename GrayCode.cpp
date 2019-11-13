@@ -1,18 +1,20 @@
 //============================================================================
 // Name        : GrayCode.cpp
 // Author      : Imogen Cleaver-Stigum & Jyalu Wu
-// Version     : 11/11/19
+// Version     : 11/12/19
 // Copyright   : 2019 IMGLU
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
 #include <math.h>
+#include <iomanip>
+#include <string>
 #include "GrayCode.h"
 using namespace std;
 
 int main() {
-	int n = 6;
+	int n = 4;
 
 	//char grayCodes[(int) pow(2,n)][n];
 	char **grayCodes;
@@ -21,12 +23,12 @@ int main() {
 		grayCodes[i] = new char[n];
 
 	newGrayCode(n, grayCodes);
-	//	for (int i = 0; i < (int)pow(2,n); i++) {
-	//		for (int j = n-1; j >= 0; j--) {
-	//			cout << grayCodes[i][j];
-	//		}
-	//		cout << endl;
-	//	}	cout << endl; cout.flush();
+//	for (int i = 0; i < (int)pow(2,n); i++) {
+//		for (int j = n-1; j >= 0; j--) {
+//			cout << grayCodes[i][j];
+//		}
+//		cout << endl;
+//	}	cout << endl; cout.flush();
 
 	printTable(n, grayCodes);
 	return 0;
@@ -56,13 +58,6 @@ void newGrayCode(int n, char **grayCodes) {
 	}
 	else {
 		newGrayCode(n - 1, grayCodesUpper);
-		//		cout << "after recursive call" << endl;
-		//		for (int i = 0; i < (int)pow(2,n-1); i++) {
-		//			for (int j = 0; j < n-1; j++) {
-		//				cout << grayCodesUpper[i][j];
-		//			}
-		//			cout << endl;
-		//		}
 
 		// copy list L1 to list L2 in reversed order
 		for (int i = 0; i < numGrayCodes/2; i++) {
@@ -90,93 +85,111 @@ void newGrayCode(int n, char **grayCodes) {
 				grayCodes[i+numGrayCodes/2][j] = grayCodesLower[i][j];
 			}
 		}
-
-
-
 	}
-	//return grayCodes;
 }
 
 
 
 void printTable(int n, char** grayCodes) {
-	char* currentGrayCode = new char[4];
-	int* abacadabra = new int[(int) pow(2,n)];
-	abacaba(n, abacadabra);
-	//	for (int i = 0; i < (int) pow(2,n); i++) {
-	//		cout << abacadabra[i];
-	//	}
-	//	cout << endl;
 
-	cout << "Index \tGray Code \tChild(ren) in Photo \t Action" << endl;
-	for (int i = 0; i < (int) pow(2,n); i++) {
-		cout << i << "\t";
+	const char separator = ' ';
+	const int indexWidth = 10;
+	const int grayCodeWidth = 15;
+	const int childrenWidth = 30;
+	const int actionWidth = 11;
+	const int size = (int) pow(2,n);
+
+	char* currentGrayCode = new char[n];
+	int* abacadabra = new int[size];
+	string childrenList = "";
+	string action = "";
+
+	abacaba(n, abacadabra);
+
+	// print out headers
+	cout << left << setw(indexWidth) << setfill(separator) << "Index";
+	cout << left << setw(grayCodeWidth) << setfill(separator) << "Gray Code";
+	cout << left << setw(childrenWidth) << setfill(separator) << "Child(ren) in Photo";
+	cout << left << setw(actionWidth) << setfill(separator) << "Action";
+	cout << endl;
+	cout << left << setw(indexWidth + grayCodeWidth + childrenWidth + actionWidth) << setfill('-') <<"";
+	cout << endl;
+
+	// for all of the gray codes
+	for (int i = 0; i < size; i++) {
+		// get the next gray code
 		for (int j = n-1; j >= 0; j--) {
-			cout << grayCodes[i][j];
+			currentGrayCode[n - j - 1] = grayCodes[i][j];
 		}
-		cout << "\t\t";
-		for (int j = n-1; j >= 0; j--) {
-			if (grayCodes[i][j] == '1') {
+
+		// get the list of children
+		for (int j = 0; j < n; j++) {
+			if (currentGrayCode[j] == '1') {
 				switch (j) {
-				case 0 :
-					cout << "Alice ";
-					break;
-				case 1 :
-					cout << "Bob ";
+				case 3 :
+					childrenList = childrenList + "Alice ";
 					break;
 				case 2 :
-					cout << "Chris ";
+					childrenList = childrenList + "Bob ";
 					break;
-				case 3 :
-					cout << "Dylan ";
+				case 1 :
+					childrenList = childrenList + "Chris ";
+					break;
+				case 0 :
+					childrenList = childrenList + "Dylan ";
 					break;
 				}
-				cout << "\t";
 			}
-
 		}
+		// get the action
 		switch (abacadabra[i]) {
 		case 0 :
-			cout << "Alice ";
-			if (grayCodes[i][0] == '1') {
-				cout << "out";
+			action = action + "Alice ";
+			if (currentGrayCode[0] == '1') {
+				action = action + "Out";
 			}
 			else {
-				cout << "in";
+				action = action + "In";
 			}
 			break;
 		case 1 :
-			cout << "Bob ";
-			if (grayCodes[i][1] == '1') {
-				cout << "out";
+			action = action + "Bob ";
+			if (currentGrayCode[1] == '1') {
+				action = action + "Out";
 			}
 			else {
-				cout << "in";
+				action = action + "In";
 			}
 			break;
 		case 2 :
-			cout << "Chris ";
-			if (grayCodes[i][2] == '1') {
-				cout << "out";
+			action = action + "Chris ";
+			if (currentGrayCode[2] == '1') {
+				action = action + "Out";
 			}
 			else {
-				cout << "in";
+				action = action + "In";
 			}
 			break;
 		case 3 :
-			cout << "Dylan ";
-			if (grayCodes[i][3] == '1') {
-				cout << "out";
+			action = action + "Dylan ";
+			if (currentGrayCode[3] == '1') {
+				action = action + "Out";
 			}
 			else {
-				cout << "in";
+				action = action + "In";
 			}
 			break;
 		}
-		cout << endl;
-	}
 
-	cout << endl;
+		cout << left << setw(indexWidth) << setfill(separator) << i;
+		cout << left << setw(grayCodeWidth) << setfill(separator) << currentGrayCode;
+		cout << left << setw(childrenWidth) << setfill(separator) << childrenList;
+		cout << left << setw(actionWidth) << setfill(separator) << action;
+		cout << endl;
+
+		childrenList = "";
+		action = "";
+	}
 }
 
 
