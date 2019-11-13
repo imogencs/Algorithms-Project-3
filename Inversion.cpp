@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : HW3_Inversion.cpp
 // Author      : Imogen Cleaver-Stigum & Jyalu Wu
-// Version     : 11/11/19
+// Version     : 11/13/19
 // Copyright   : 2019 IMGLU
 // Description : Hello World in C++, Ansi-style
 //============================================================================
@@ -93,7 +93,7 @@ and returns inversion count in the arrays.*/
  * @param left The starting index of the left subarray
  * @param mid The starting index of the left subarray
  * @param right The starting index of the right subarray
- * @
+ * @return The inversion count
  */
 int merge(int array[], int temp[], int left, int right, int lastArrayIndex) {
     int count = 0;
@@ -111,17 +111,12 @@ int merge(int array[], int temp[], int left, int right, int lastArrayIndex) {
         }
     }
 
-    /* Copy the remaining elements of left subarray
-(if there are any) to temp*/
     while (leftIndex <= right - 1)
         temp[mergeIndex++] = array[leftIndex++];
 
-    /* Copy the remaining elements of right subarray
-(if there are any) to temp*/
     while (rightIndex <= lastArrayIndex)
         temp[mergeIndex++] = array[rightIndex++];
 
-    /*Copy back the merged elements to original array*/
     for (leftIndex = left; leftIndex <= lastArrayIndex; leftIndex++)
     	array[leftIndex] = temp[leftIndex];
 

@@ -1,9 +1,10 @@
-/*
- * HW3_Inversion.h
- *
- *  Created on: Nov 11, 2019
- *      Author: Jyalu
- */
+//============================================================================
+// Name        : HW3_Inversion.cpp
+// Author      : Imogen Cleaver-Stigum & Jyalu Wu
+// Version     : 11/13/19
+// Copyright   : 2019 IMGLU
+// Description : Hello World in C++, Ansi-style
+//============================================================================
 
 #ifndef INVERSION_H_
 #define INVERSION_H_
