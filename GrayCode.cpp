@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : GrayCode.cpp
 // Author      : Imogen Cleaver-Stigum & Jyalu Wu
-// Version     : 11/12/19
+// Version     : 11/13/19
 // Copyright   : 2019 IMGLU
 // Description : Hello World in C++, Ansi-style
 //============================================================================
@@ -16,27 +16,22 @@ using namespace std;
 int main() {
 	int n = 4;
 
-	//char grayCodes[(int) pow(2,n)][n];
+	//initializing grayCodes
 	char **grayCodes;
 	grayCodes = new char *[(int) pow(2,n)];
 	for(int i = 0; i < (int) pow(2,n); i++)
 		grayCodes[i] = new char[n];
 
 	newGrayCode(n, grayCodes);
-	//	for (int i = 0; i < (int)pow(2,n); i++) {
-	//		for (int j = n-1; j >= 0; j--) {
-	//			cout << grayCodes[i][j];
-	//		}
-	//		cout << endl;
-	//	}	cout << endl; cout.flush();
-
 	printTable(n, grayCodes);
 	return 0;
 }
 
-//Generates recursively the binary reflected Gray code of order n
-//Input: A positive integer n
-//Output: A list of all bit strings of length n composing the Gray code
+/*
+ * Generates the Binary Reflected Gray Code of order n recursively.
+ * @param n The given order
+ * @param grayCodes The given empty array to store the Gray Codes
+ */
 void newGrayCode(int n, char **grayCodes) {
 	int numGrayCodes = (int) pow(2, n);
 	//	char grayCodesUpper[numGrayCodes][n];
@@ -89,7 +84,12 @@ void newGrayCode(int n, char **grayCodes) {
 }
 
 
-
+/*
+ * Prints the given Gray Codes in table format, specifying the index, the actual
+ * Gray Code, the children who will be in the photo, and which action was taken.
+ * @param n The given order
+ * @param grayCodes The given empty array to store the Gray Codes
+ */
 void printTable(int n, char** grayCodes) {
 
 	const char separator = ' ';
@@ -130,7 +130,7 @@ void printTable(int n, char** grayCodes) {
 					childrenList = childrenList + "Alice ";
 					break;
 				case 2 :
-					childrenList = childrenList + "Bob ";
+					childrenList = childrenList + "Bowie ";
 					break;
 				case 1 :
 					childrenList = childrenList + "Chris ";
@@ -147,37 +147,37 @@ void printTable(int n, char** grayCodes) {
 			case 0 :
 				action = action + "Alice ";
 				if (currentGrayCode[3] == '1') {
-					action = action + "In";
+					action = action + "Come Here";
 				}
 				else {
-					action = action + "Out";
+					action = action + "Go Away";
 				}
 				break;
 			case 1 :
-				action = action + "Bob ";
+				action = action + "Bowie ";
 				if (currentGrayCode[2] == '1') {
-					action = action + "In";
+					action = action + "Come Here";
 				}
 				else {
-					action = action + "Out";
+					action = action + "Go Away";
 				}
 				break;
 			case 2 :
 				action = action + "Chris ";
 				if (currentGrayCode[1] == '1') {
-					action = action + "In";
+					action = action + "Come Here";
 				}
 				else {
-					action = action + "Out";
+					action = action + "Go Away";
 				}
 				break;
 			case 3 :
 				action = action + "Dylan ";
 				if (currentGrayCode[0] == '1') {
-					action = action + "In";
+					action = action + "Come Here";
 				}
 				else {
-					action = action + "Out";
+					action = action + "Go Away";
 				}
 				break;
 			}
@@ -194,7 +194,13 @@ void printTable(int n, char** grayCodes) {
 	}
 }
 
-
+/*
+ * Generates an abacaba sequence, represented by n different integers. For example,
+ * if the function is given n=3, the sequence would be 0102010 and if it was given
+ * n=4, the sequence would be 010201030102010
+ * @param n, The given number of integers
+ * @param abracadabra, The given empty array to store the sequence
+ */
 void abacaba(int n, int* abracadabra) {
 	if (n == 1) {
 		abracadabra[n-1] = 0;
@@ -205,6 +211,5 @@ void abacaba(int n, int* abracadabra) {
 		for (int i = 0; i < (int) pow(2,n-1)-1; i++) {
 			abracadabra[i + (int) pow(2,n-1)] = abracadabra[i];
 		}
-
 	}
 }

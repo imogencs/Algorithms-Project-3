@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : GrayCode.h
 // Author      : Imogen Cleaver-Stigum & Jyalu Wu
-// Version     : 11/12/19
+// Version     : 11/13/19
 // Copyright   : 2019 IMGLU
 // Description : Hello World in C++, Ansi-style
 //============================================================================
